@@ -48,10 +48,15 @@ class Obstacle(pygame.sprite.Sprite):
 			fly_2 = pygame.image.load('graphics/fly/fly2.png').convert_alpha()
 			self.frames = [fly_1,fly_2]
 			y_pos = 210
-		else:
+		elif type == 'snail':
 			snail_1 = pygame.image.load('graphics/snail/snail1.png').convert_alpha()
 			snail_2 = pygame.image.load('graphics/snail/snail2.png').convert_alpha()
 			self.frames = [snail_1,snail_2]
+			y_pos  = 300
+		elif type == 'cactus':
+			cactus_1 = pygame.image.load('graphics/cactus/c1.png').convert_alpha()
+			cactus_2 = pygame.image.load('graphics/cactus/c2.png').convert_alpha()
+			self.frames = [cactus_1,cactus_2]
 			y_pos  = 300
 
 		self.animation_index = 0
@@ -124,7 +129,7 @@ while True:
 
 		if game_active:
 			if event.type == obstacle_timer:
-				obstacle_group.add(Obstacle(choice(['fly','snail','snail','snail'])))
+				obstacle_group.add(Obstacle(choice(['snail','fly','snail','fly','cactus','snail','fly','cactus'])))
 		
 		else:
 			if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
