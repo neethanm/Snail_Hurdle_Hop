@@ -2,6 +2,8 @@ import pygame
 from sys import exit
 from random import randint, choice
 
+highscore=0
+
 class Player(pygame.sprite.Sprite):
 	def __init__(self):
 		super().__init__()
@@ -136,7 +138,10 @@ while True:
 		screen.blit(sky_surface,(0,0))
 		screen.blit(ground_surface,(0,300))
 		score = display_score()
-		
+
+		if score>highscore:
+			highscore=score
+	
 		player.draw(screen)
 		player.update()
 
@@ -149,12 +154,19 @@ while True:
 		screen.fill((94,129,162))
 		screen.blit(player_stand,player_stand_rect)
 
+		highscore_message = test_font.render(f'Your high score: {highscore}',False,(111,196,169))
+		highscore_message_rect = highscore_message.get_rect(center = (400,330))
+		screen.blit(game_name,game_name_rect)
+
+
 		score_message = test_font.render(f'Your score: {score}',False,(111,196,169))
-		score_message_rect = score_message.get_rect(center = (400,330))
+		score_message_rect = score_message.get_rect(center = (400,370))
 		screen.blit(game_name,game_name_rect)
 
 		if score == 0: screen.blit(game_message,game_message_rect)
-		else: screen.blit(score_message,score_message_rect)
+		else: 
+			screen.blit(highscore_message,highscore_message_rect)
+			screen.blit(score_message,score_message_rect)
 
 	pygame.display.update()
 	clock.tick(60)
